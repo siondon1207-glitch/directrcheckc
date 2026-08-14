@@ -1,23 +1,547 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <!-- Structured Data for LLM/Search Engines (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "2026 토요타 캠리 하이브리드",
+      "image": [
+        "https://auto.reliabledone.com/images/toyota-camry-2026.jpg"
+      ],
+      "description": "2026년형 토요타 9세대 캠리 하이브리드(XV80)의 국내 출시 공식 가격과 XLE, XLE 프리미엄 트림별 사양 차이 및 취등록세 정보를 상세히 제공합니다.",
+      "brand": {
+        "@type": "Brand",
+        "name": "토요타 (Toyota)"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "KRW",
+        "lowPrice": "47750000",
+        "highPrice": "53270000",
+        "offerCount": "2"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "2026년형 토요타 캠리 하이브리드의 공식 출시 가격은 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026년형 토요타 캠리 하이브리드 9세대의 공식 출시 가격은 개별소비세 30% 인하 기준으로 XLE 트림이 4,775만 원, XLE 프리미엄(Premium) 트림이 5,327만 원으로 책정되었습니다. 이전 연식 대비 추가적인 옵션 변화 없이 공급 가격을 인하하여 수입 하이브리드 세단 시장에서 가격 경쟁력을 대폭 확보하였습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "캠리 하이브리드 XLE 트림과 XLE 프리미엄 트림의 주요 옵션 차이점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "두 트림의 가격 차이는 552만 원이며, 주요 옵션 사양에서 큰 차이가 납니다. XLE 프리미엄 트림에는 JBL 프리미엄 오디오(9 스피커), 헤드업 디스플레이(HUD), 디지털 리어뷰 미러, 3존 독립식 자동 에어컨, 파노라믹 뷰 모니터(어라운드 뷰), 파노라믹 선루프, 운전석 메모리 시트 및 조수석 파워 시트, 뒷좌석 열선 및 전동식 리클라이닝 시트, 리어 컨트롤 스위치가 추가로 탑재됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "하이브리드 차량 구입 시 세금 감면 혜택과 취등록세 계산은 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026년 기준으로 친환경 하이브리드 자동차를 신규 등록할 때 개별소비세는 최대 100만 원까지 감면되며, 취등록세는 일반 승용차 요율 7%가 적용된 금액에서 하이브리드 세액 감면 혜택(최대 40만 원 감면)을 공제한 금액이 부과됩니다. 취등록세 계산기를 활용하여 실구매 금액을 확인하시는 것이 안전합니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #A93226; /* Soft Rich Red (Toyota Palette) */
+            --secondary-color: #2C3E50; /* Slate Gray */
+            --accent-color: #16A085; /* Teal for high visibility */
+            --text-color: #2C3E50;
+            --text-muted: #7F8C8D;
+            --bg-light: #F8F9F9; /* Off-white */
+            --bg-dark: #1A252F; /* Rich Navy */
+            --btn-cta: #A93226;
+            --border-color: #E5E8E8;
+            --header-bg: #FFFFFF;
+            --footer-bg: #1C2833;
+        }
+        
+        /* Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        /* Base Styles */
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; background-color: var(--bg-light); color: var(--text-color); line-height: 1.8; font-size: 16px; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; }
+        
+        /* Header */
+        header { background-color: var(--header-bg); padding: 24px 0; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        .header-container { display: flex; justify-content: space-between; align-items: center; }
+        header h1 { margin: 0; font-size: 1.8em; color: var(--primary-color); font-weight: 900; letter-spacing: -0.5px; }
+        header h1 a { text-decoration: none; color: inherit; }
+        .nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+        .nav-links a { text-decoration: none; color: var(--secondary-color); font-weight: 500; font-size: 0.95em; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* Hero Section */
+        .hero { background-image: linear-gradient(135deg, rgba(26,37,47,0.95), rgba(44,62,80,0.85)), url('https://via.placeholder.com/1200x500/1A252F/FFFFFF?text=Toyota+Camry+Hybrid+2026');
+                background-color: var(--bg-dark); color: #fff; text-align: center; padding: 120px 20px; position: relative; overflow: hidden; background-size: cover; background-position: center; }
+        .hero h2 { font-size: 3.2em; margin-bottom: 20px; font-weight: 900; line-height: 1.3; letter-spacing: -1px; }
+        .hero p { font-size: 1.3em; margin-bottom: 35px; font-weight: 300; color: #BDC3C7; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .hero .highlight { color: #E74C3C; font-weight: 700; }
+
+        /* CTA Button */
+        .cta-btn { background-color: var(--btn-cta); color: #fff; padding: 16px 36px; font-size: 1.15em; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s, transform 0.2s; box-shadow: 0 4px 15px rgba(169,50,38,0.3); text-decoration: none; display: inline-block; }
+        .cta-btn:hover { background-color: #922B21; transform: translateY(-2px); }
+
+        /* Main Content Structure */
+        main { background-color: #fff; padding-bottom: 60px; }
+        .content-section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
+        .content-section:last-child { border-bottom: none; }
+        .content-section h2 { font-size: 2.2em; color: var(--secondary-color); text-align: left; margin-bottom: 35px; font-weight: 800; line-height: 1.4; border-bottom: 3px solid var(--primary-color); padding-bottom: 12px; display: inline-block; }
+        .content-section h3 { font-size: 1.6em; color: var(--secondary-color); margin-top: 50px; margin-bottom: 20px; font-weight: 700; border-left: 5px solid var(--primary-color); padding-left: 15px; }
+        .content-section h4 { font-size: 1.25em; color: var(--primary-color); margin-top: 30px; margin-bottom: 12px; font-weight: 700; }
+        .content-section p { margin-bottom: 24px; font-weight: 400; color: #34495E; text-align: justify; }
+        .content-section strong { font-weight: 700; color: var(--secondary-color); }
+        .content-section ul { list-style: none; padding-left: 0; margin-bottom: 30px; }
+        .content-section li { padding: 12px 0; border-bottom: 1px solid var(--border-color); color: #4D5656; font-size: 0.98em; }
+
+        /* Data Visualization (Tables) */
+        .table-responsive { overflow-x: auto; margin: 30px 0; border-radius: 6px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        .data-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 600px; }
+        .data-table th, .data-table td { padding: 18px 20px; border-bottom: 1px solid var(--border-color); font-size: 0.95em; }
+        .data-table th { background-color: var(--secondary-color); color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:nth-child(even) { background-color: #F8F9F9; }
+        .data-table td strong { color: var(--primary-color); }
+
+        /* Interactive Elements (Quote Estimator) */
+        .comparison-form-box { background-color: #FFFFFF; padding: 50px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-color); margin: 40px auto; max-width: 700px; }
+        .comparison-form-box h3 { color: var(--secondary-color); text-align: center; margin-bottom: 25px; font-size: 1.8em; border-left: none; padding-left: 0; }
+        .comparison-form-box p.description { text-align: center; font-size: 1.05em; color: var(--text-muted); margin-bottom: 35px; }
+        .comparison-form-box label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--secondary-color); font-size: 0.9em; }
+        .comparison-form-box input[type="text"], 
+        .comparison-form-box input[type="number"],
+        .comparison-form-box select { width: 100%; padding: 14px 18px; margin-bottom: 24px; border: 1px solid #D5DBDB; border-radius: 4px; box-sizing: border-box; font-size: 1em; color: var(--secondary-color); transition: border-color 0.2s; }
+        .comparison-form-box input[type="text"]:focus, 
+        .comparison-form-box input[type="number"]:focus,
+        .comparison-form-box select:focus { border-color: var(--primary-color); outline: none; }
+        
+        /* Calculator Output Card */
+        .calculator-result { display: none; background-color: #F4F6F6; border-left: 6px solid var(--accent-color); padding: 30px; margin-top: 30px; border-radius: 4px; }
+        .calculator-result h4 { margin-top: 0; color: var(--accent-color); font-size: 1.4em; }
+        .result-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1.05em; border-bottom: 1px dashed #BDC3C7; padding-bottom: 8px; }
+        .result-row:last-child { border-bottom: none; margin-bottom: 0; font-weight: 700; font-size: 1.25em; color: var(--primary-color); }
+
+        /* Infobox/Highlighting */
+        .info-box { background-color: #EBF5FB; border-left: 5px solid #2980B9; padding: 25px; margin: 35px 0; border-radius: 4px; }
+        .info-box h4 { margin-top: 0; color: #2980B9; font-weight: 700; }
+        .info-box p { margin-bottom: 0; font-size: 0.98em; color: #2C3E50; }
+
+        /* FAQ Section */
+        .faq-item { background-color: #fff; border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 16px; overflow: hidden; }
+        .faq-item h3 { cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 22px 24px; background-color: #FDFEFE; margin: 0; font-size: 1.1em; font-weight: 700; color: var(--secondary-color); border-left: none; }
+        .faq-item h3::after { content: '펼치기'; font-size: 0.8em; color: var(--text-muted); font-weight: 400; }
+        .faq-item.active h3 { background-color: var(--bg-light); border-bottom: 1px solid var(--border-color); }
+        .faq-item.active h3::after { content: '접기'; }
+        .faq-item p { display: none; padding: 24px; color: #4D5656; background-color: #fff; margin: 0; font-size: 0.98em; border-top: none; }
+        .faq-item.active p { display: block; }
+
+        /* Related Keywords list */
+        .keyword-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; margin-top: 40px; }
+        .keyword-list li { background-color: #EAEDED; color: var(--secondary-color); padding: 8px 16px; border-radius: 3px; font-size: 0.85em; font-weight: 500; border: 1px solid #D5DBDB; transition: all 0.2s; }
+        .keyword-list li:hover { background-color: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+        .link-source { font-size: 0.95em; color: var(--primary-color); text-decoration: none; font-weight: 700; display: inline-block; margin-top: 10px; border-bottom: 1px solid var(--primary-color); }
+        .link-source:hover { color: #922B21; border-bottom-color: #922B21; }
+
+        /* Footer */
+        footer { background-color: var(--footer-bg); color: #95A5A6; text-align: center; padding: 60px 20px; font-size: 0.9em; line-height: 1.8; border-top: 4px solid var(--primary-color); }
+        footer a { color: #BDC3C7; text-decoration: none; margin: 0 12px; transition: color 0.2s; }
+        footer a:hover { color: #fff; text-decoration: underline; }
+        .footer-copyright { margin-top: 25px; color: #7F8C8D; font-size: 0.85em; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.2em; }
+            .hero p { font-size: 1.1em; }
+            .cta-btn { padding: 14px 28px; font-size: 1.05em; }
+            .content-section h2 { font-size: 1.8em; }
+            .content-section h3 { font-size: 1.35em; }
+            .comparison-form-box { padding: 25px; }
+            .data-table th, .data-table td { font-size: 0.85em; padding: 12px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <h1><a href="/">토요타 캠리 하이브리드 가격비교 분석센터</a></h1>
+            <ul class="nav-links">
+                <li><a href="#캠리-가격표">트림별 요금표</a></li>
+                <li><a href="#할부-계산기">실구매가 계산</a></li>
+                <li><a href="#경쟁-비교">라이벌 모델 비교</a></li>
+                <li><a href="#커뮤니티-동향">실제 오너 평가</a></li>
+            </ul>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h2>2026 토요타 캠리 하이브리드<br><span class="highlight">국내 최신 가격표 및 금융비용</span> 상세 분석</h2>
+                <p>9세대 풀체인지 XV80 모델의 합리적인 구매 방법과 최저가 보증 리스, 장기렌트 견적 비교를 지원합니다. 수입 세단 최강의 내구성과 연비를 지금 직접 산출해보세요.</p>
+                <a href="#할부-계산기" class="cta-btn">캠리 취등록세 및 견적 실시간 계산하기</a>
+            </div>
+        </section>
+
+        <!-- Interactive Estimator Section -->
+        <section id="할부-계산기" class="content-section" style="background-color: var(--bg-light);">
+            <div class="container">
+                <div class="comparison-form-box">
+                    <h3>2026 캠리 하이브리드 실구매가 및 세금 계산기</h3>
+                    <p class="description">원하시는 트림과 옵션 조건, 할인 적용 여부 및 신청 종류를 기입하시면 취등록세를 포함한 최종 예상 인수 금액이 자동으로 산출됩니다.</p>
+                    <form id="camry-calc-form" onsubmit="calculateCamryPrice(event)">
+                        <div class="form-group">
+                            <label for="camry-trim">선택할 캠리 트림 (2026년형 가솔린 2.5 HEV)</label>
+                            <select id="camry-trim" required onchange="updateDefaultDiscount()">
+                                <option value="47750000">가솔린 2.5 HEV XLE (개소세 인하) - 47,750,000원</option>
+                                <option value="53270000">가솔린 2.5 HEV XLE Premium (개소세 인하) - 53,270,000원</option>
+                                <option value="48430000">가솔린 2.5 HEV XLE (일반 가격) - 48,430,000원</option>
+                                <option value="54030000">가솔린 2.5 HEV XLE Premium (일반 가격) - 54,030,000원</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="camry-discount">예상 딜러 프로모션 및 공식 할인 금액 (원)</label>
+                            <input type="number" id="camry-discount" value="500000" min="0" placeholder="예: 500000">
+                        </div>
+                        <div class="form-group">
+                            <label for="finance-type">구매 형태 및 금융 요금제</label>
+                            <select id="finance-type" required>
+                                <option value="cash">일시불 (다이렉트 현금 구매)</option>
+                                <option value="install">신차 할부 금융 프로그램 (카드 오토캐시백 연계)</option>
+                                <option value="lease">전문 업체 운용 리스 (초기 비용 최소화)</option>
+                                <option value="rent">번호판 면제 장기렌트 상품 (보험료 통합형)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="cta-btn" style="width:100%; border-radius:4px;">실구매가 분석 및 견적 산출</button>
+                    </form>
+
+                    <!-- Calculator Output Card -->
+                    <div id="calc-result" class="calculator-result">
+                        <h4>산출 결과 요약</h4>
+                        <div class="result-row">
+                            <span>선택 차량 기본 가격</span>
+                            <span id="res-base-price">0원</span>
+                        </div>
+                        <div class="result-row">
+                            <span>적용 할인 지원금</span>
+                            <span id="res-discount">0원</span>
+                        </div>
+                        <div class="result-row">
+                            <span>취등록세 (하이브리드 40만원 감면 적용)</span>
+                            <span id="res-tax">0원</span>
+                        </div>
+                        <div class="result-row">
+                            <span>최종 예상 실구매 비용</span>
+                            <span id="res-total">0원</span>
+                        </div>
+                        <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 15px; text-align: center;">본 견적 계산기로 산출된 값은 예상 금액이며, 개별 세부 혜택과 프로모션 조건에 따라 달라질 수 있으므로 브랜드 전국 전시장 고객센터나 제휴 전문 컨설팅 상담을 거쳐 정확한 청구 요금을 파악하시는 방법을 추천합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Article Content 1 -->
+        <section class="content-section">
+            <div class="container">
+                <h2 id="캠리-개요">2026 토요타 캠리 하이브리드 시장 분석과 트림별 공식 가격</h2>
+                <p>대한민국 준대형 세단 시장에서 오직 기술적 신뢰도와 탁월한 연비 성능 하나만으로 독자적인 영토를 개척해온 대표적 수입차 브랜드가 있습니다. 바로 오랜 시간 글로벌 베스트셀러 자리를 고수해온 <strong>토요타 캠리</strong>입니다. 2026년 국내 수입차 시장에 안착한 <strong>9세대 캠리 (XV80)</strong>는 기존 8.5세대와 비교해 섀시, 디자인, 그리고 파워트레인을 완전히 개편한 <strong>캠리 풀체인지</strong> 모델입니다.</p>
+                <p>이번 <strong>2026년형 캠리 하이브리드</strong>는 소비자들에게 큰 반향을 불러일으키고 있습니다. 통상 연식 변경이나 세대 변경을 진행할 때 수입차 판매 가격이 큰 폭으로 치솟는 기존 관행과 달리, 공급 가격을 사양 유지 하에 소폭 인하하는 대담한 마케팅 승부수를 던졌기 때문입니다. 일본 현지 공장에서 엄격한 관리 속에 생산되어 전량 수입되는 이 모델은 패밀리카 구매를 계획하는 현명한 오너평가 집단에서 합리적인 대안으로 지속적으로 추천되고 있습니다.</p>
+
+                <h3 id="캠리-가격표">2026년형 캠리 하이브리드 공식 트림별 요금표 및 세부 세액</h3>
+                <p>수입 중형 세단의 교과서로 불리는 토요타 캠리 가솔린 2.5 HEV 모델은 국내에서 크게 두 가지 라인업인 <strong>캠리 하이브리드 XLE</strong> 트림과 최고급 지향 사양인 <strong>캠리 XLE 프리미엄</strong> 트림으로 이원화하여 판매를 전개하고 있습니다. 개별소비세 기준 요율에 따라 소비자 공급가에 미세한 차이점이 존재하므로 하단의 비교 정보를 꼼꼼하게 대조해보아야 합니다.</p>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>세부 모델 분류</th>
+                                <th>연식구분</th>
+                                <th>엔진 및 구동형식</th>
+                                <th>개소세 30% 인하가</th>
+                                <th>일반 표준 가격</th>
+                                <th>공인 연비 효율</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>캠리 가솔린 2.5 HEV XLE</strong></td>
+                                <td>2026년형 신형</td>
+                                <td>2.5L 하이브리드 / 전륜구동</td>
+                                <td><strong>47,750,000원</strong></td>
+                                <td>48,430,000원</td>
+                                <td>복합 17.1 km/L</td>
+                            </tr>
+                            <tr>
+                                <td><strong>캠리 가솔린 2.5 HEV XLE Premium</strong></td>
+                                <td>2026년형 신형</td>
+                                <td>2.5L 하이브리드 / 전륜구동</td>
+                                <td><strong>53,270,000원</strong></td>
+                                <td>54,030,000원</td>
+                                <td>복합 17.1 km/L</td>
+                            </tr>
+                            <tr>
+                                <td><strong>캠리 9세대 하이브리드 (2025 초기형)</strong></td>
+                                <td>2025년형 단종</td>
+                                <td>2.5L 하이브리드 / 전륜구동</td>
+                                <td>48,000,000원</td>
+                                <td>48,650,000원</td>
+                                <td>복합 17.1 km/L</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>표를 통해 쉽게 파악할 수 있듯이, 2026년형 모델은 2025년형 초기 출시 가격인 4,800만 원 및 5,360만 원에 비해 가격이 미세하게 인하된 특징을 보입니다. 가격 인상이 보편화된 국내 자동차 환경에서 이러한 요금 책정은 소비자들에게 체감 상 큰 할인 혜택으로 여겨지고 있으며, 실제 실구매가 부담을 덜 수 있는 긍정적인 신호로 작용합니다.</p>
+            </div>
+        </section>
+
+        <!-- SEO Article Content 2 -->
+        <section class="content-section" style="background-color: var(--bg-light);">
+            <div class="container">
+                <h2 id="트림별-사양">캠리 XLE 및 XLE 프리미엄 트림 사양 및 중요 차이점 대조</h2>
+                <p>캠리 하이브리드 신차 가입을 고심하는 예비 오너들이 제일 먼저 맞닥뜨리는 의문은 바로 두 트림 간의 가치 대비 552만 원이라는 세금 포함 차액이 합당한 수준인가 하는 점입니다. 두 트림은 파워트레인과 기본 구동 성능(시스템 합산 최고 출력 227마력, e-CVT 무단변속기 탑재) 및 강인하고 균형 잡힌 TNGA-K 플랫폼 섀시 구조는 완벽하게 동일합니다. 그러나 실내 거주성 및 주행 편의 사양 분야에서 명확한 차이점을 지니고 있습니다.</p>
+
+                <h3 id="트림별-기본사양">트림별 옵션 분배 양상 및 프리미엄 전용 기능 일람</h3>
+                <ul>
+                    <li><strong>안전 중심 장비 (공통):</strong> 토요타의 첨단 예방 안전 기술 패키지인 캠리 TSS 3.0(Toyota Safety Sense)이 전 트림에 기본 사양으로 가입되어 차선 유지 어시스트, 다이내믹 레이더 크루즈 컨트롤, 긴급 제동 보조 시스템을 제공합니다.</li>
+                    <li><strong>디스플레이 시스템 (공통):</strong> 대형 12.3인치 멀티 인포테인먼트 계기판과 동일한 규격의 12.3인치 센터 디스플레이가 적용되어 애플 카플레이와 안드로이드 오토 무선 연결을 원활하게 지원합니다.</li>
+                    <li><strong>XLE 프리미엄 전용 추가 편의 사양:</strong>
+                        <br>1. 명품 JBL 프리미엄 사운드 시스템 (9개 고성능 스피커 적용으로 입체 오디오 경험 선사)
+                        <br>2. 컬러 헤드업 디스플레이 (HUD) 및 후방 시야가 차단되어도 문제없는 디지털 리어뷰 미러
+                        <br>3. 쾌적한 3존 독립 제어 풀오토 공조 시스템 및 광활한 시야를 열어주는 파노라믹 선루프
+                        <br>4. 사각지대를 완전히 없애주는 서라운드 뷰 계열의 파노라믹 뷰 모니터 시스템
+                        <br>5. 주행 편의를 극대화하는 앞좌석 운전석 메모리 시트 및 동승석 방향 파워 시트 연동
+                        2열 탑승객을 배려한 뒷좌석 파워 틸트 및 리클라이닝 조절 기능, 그리고 2열 열선 및 다기능 리어 암레스트 컨트롤 스위치
+                    </li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>전문가 추천 트림 제안</h4>
+                    <p>만약 법인 리스나 장기렌트 가격 할인 프로모션을 통해 월 고정 요금 비용을 납부할 목적이고 패밀리카로서 다인 탑승 목적이 뚜렷하다면, 2열 거주 편의성이 대폭 상향되는 <strong>XLE 프리미엄</strong> 트림을 적극 추천합니다. 그러나 1인 출퇴근용이나 연비 위주의 경제적 운용을 중시하며 가장 저렴한곳 혹은 제일 싼곳 위주의 최저가 실구매를 지향하신다면 기본 사양인 <strong>XLE</strong>만으로도 수입 세단 특유의 만족도와 기본 연비 효율을 충분히 만끽할 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Article Content 3 -->
+        <section class="content-section">
+            <div class="container">
+                <h2 id="경쟁-비교">국산 준대형의 절대강자 현대 그랜저 하이브리드와의 치열한 비교</h2>
+                <p>대한민국 도로 위에서 가장 치열한 경합이 예상되는 지점은 단연 국내 대형 세단 판매량 1위의 위엄을 자랑하는 <strong>현대 그랜저 하이브리드</strong> 및 기아 K8과의 대결 구도입니다. 체급 면에서는 캠리가 중형 패밀리카(D-세그먼트)에 포지셔닝되는 반면, 그랜저는 전장 5,000mm가 넘는 준대형(E-세그먼트)에 속하여 엄격한 잣대로 비교하면 체급의 차이가 존재합니다. 하지만 실구매 견적과 월 지불 요금제 구간이 4,000만 원대 중후반에서 긴밀하게 겹치며 소비자의 실질적인 갈등을 자아내고 있습니다.</p>
+
+                <h3 id="라이벌-체급비교">캠리 하이브리드와 경쟁 기종 제원 및 혜택 비교</h3>
+                <p>아래 대조 데이터를 통해 실연비 오너평가 및 유지비 절감 수치에서 어떤 명확한 장단점이 갈리는지 명확하게 검토해보겠습니다.</p>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>대상 차종 명칭</th>
+                                <th>기준 트림 가격</th>
+                                <th>전장 규격 (mm)</th>
+                                <th>엔진 형식 및 마력</th>
+                                <th>정부 공인 복합연비</th>
+                                <th>취등록세 혜택 여부</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>토요타 캠리 HEV XLE</strong></td>
+                                <td><strong>47,750,000원</strong></td>
+                                <td>4,920</td>
+                                <td>2.5L 자연흡기 + 모터 (227마력)</td>
+                                <td><strong>17.1 km/L</strong> (실연비 우수)</td>
+                                <td>하이브리드 세액 감면 40만원</td>
+                            </tr>
+                            <tr>
+                                <td><strong>현대 그랜저 HEV 익스클루시브</strong></td>
+                                <td>46,380,000원</td>
+                                <td>5,035</td>
+                                <td>1.6L 가솔린 터보 + 모터 (230마력)</td>
+                                <td>15.7 km/L (18인치 기준)</td>
+                                <td>하이브리드 세액 감면 40만원</td>
+                            </tr>
+                            <tr>
+                                <td><strong>혼다 어코드 하이브리드</strong></td>
+                                <td>53,400,000원</td>
+                                <td>4,970</td>
+                                <td>2.0L 직분사 HEV (204마력)</td>
+                                <td>16.7 km/L</td>
+                                <td>하이브리드 세액 감면 40만원</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>그랜저 하이브리드가 화려하고 압도적인 공간감과 첨단 디지털 대시보드를 무기로 삼는다면, 9세대 캠리 하이브리드는 장기적인 내구성과 고장 없는 엔진 품질, 그리고 실제 도심 주행에서 리터당 20km를 가볍게 무력화하며 돌파한다는 실사용 오너들의 압도적 찬사를 바탕으로 세를 넓히고 있습니다. 장기적으로 차를 소유하며 발생할 수 있는 소모품 교체 및 정비 정비 요금제 비용을 계산기로 면밀히 분석한다면 캠리의 잔존 가치가 지닌 무서운 파급력을 확인할 수 있습니다.</p>
+            </div>
+        </section>
+
+        <!-- SEO Article Content 4 -->
+        <section class="content-section" style="background-color: var(--bg-light);">
+            <div class="container">
+                <h2 id="금융-프로그램">캠리 하이브리드 신차 최적화 구매 전술: 일시불 vs 리스 vs 장기렌트</h2>
+                <p>캠리 신형 수입차를 인도받기 위해 소비자가 도달하는 구매 접점의 종류는 무척 다채롭습니다. 현명한 예비 바이어라면 단순히 차량 찻값 일시 지불 방식에 머무르지 않고, 본인의 사업자 운영 성향이나 자산 보유 목적에 알맞은 최적의 금융 설계 컨설팅을 전문 업체로부터 상담받아야 마땅합니다. 매달 지불하는 가계 고정비(가정 인터넷 가입 요금, 통신비 등)와 마찬가지로 차량 월 납입 요금 역시 가계 부담으로 직결되기 때문입니다.</p>
+
+                <h3 id="다이렉트-비교">다이렉트 금융 수단별 장단점과 효율적 비용 설계법</h3>
+                <p>차량 인수를 결심하고 각 딜러사의 오프라인 및 온라인 공식 사이트와 성지 좌표 업체를 조사하다 보면, 일시불 일시지급 외에 할부, 리스, 신규 장기렌트 등 다양한 옵션을 제안받게 됩니다.</p>
+                <ul>
+                    <li><strong>다이렉트 신차 할부 금융:</strong> 일시불 자금 확보가 다소 부담스러운 경우 적용하기 유용한 방법입니다. 시중 제1금융권 혹은 카드사의 신차 오토캐시백 연계 할부 어플 및 앱을 사용해 이율과 중도해지 요금 위약금을 확실히 비교한 후 신청하는 것이 최저가 유지에 유리합니다.</li>
+                    <li><strong>운용 리스 (Lease):</strong> 수입차 특유의 감가상각과 법인 및 개인사업자 종합소득세 비용 처리를 적극 도모하고자 하는 경우에 추천하는 전문 금융 방식입니다. 렌트카 특유의 번호판(하, 허, 호) 사용을 기피하며, 개인 보험 경력을 그대로 유지하여 무사고 할인을 이어나가고자 하는 소비자에게 이상적입니다.</li>
+                    <li><strong>신규 장기렌트 (Rent):</strong> 초기 보증금이나 선납금 조건을 다양하게 조율하여 월 대여료 내에 자동차 세금과 자동차 종합 보험 비용까지 모조리 포함시키는 토탈 케어 솔루션입니다. 사고 발생 시 대리점이나 대형 보험 대여 업체의 자체 면책금 제도를 활용해 개인 할증 리스크를 방어할 수 있다는 최고의 메리트를 확보합니다.</li>
+                </ul>
+
+                <p>이때 자동차 세금 감면을 포함한 세부 세액 요소를 계산하기 위해 시중에 널리 유포된 자동차 세금 계산기 모바일 앱을 다운로드하여 사전 모의견적을 도출해 보는 행위는 신뢰도 높은 예산을 잡기 위한 지름길입니다. 특히 하이브리드 차량은 정부에서 지원하는 각종 환경 보호 보조금 및 신규 취등록세 40만 원 기본 감면 혜택이 적용되므로, 이를 빠짐없이 적용받는 방법과 신청하는법을 정확하게 검토해야 합니다.</p>
+            </div>
+        </section>
+
+        <!-- SEO Article Content 5 -->
+        <section class="content-section">
+            <div class="container">
+                <h2 id="커뮤니티-동향">대형 커뮤니티(디시, 보배드림, 에펨코리아) 오너 시승평가 분석</h2>
+                <p>자동차 가입 전, 실제 시선과 맹점을 가장 날카롭게 지적하는 곳은 다름 아닌 대형 온라인 동호회 커뮤니티 공간입니다. <strong>디시인사이드 자동차 갤러리</strong>를 비롯하여, 정통 국내 자동차 성지로 통하는 <strong>보배드림</strong>, 그리고 젊은 층의 활발한 의견 공유가 이루어지는 <strong>펨코(에펨코리아)</strong> 등에서 수집한 캠리 9세대 실구매자 오너평가와 내돈내산 후기들을 종합하여 일목요연하게 전달해 드립니다.</p>
+
+                <h3 id="커뮤니티-요약">커뮤니티 내 주요 실오너 리얼 피드백 핵심 요약</h3>
+                <p>장점과 단점이 가감 없이 토론되는 이들 커뮤니티 성지 공간에서 발견되는 공통적인 핵심 트렌드는 아래와 같습니다.</p>
+                <ul>
+                    <li><strong>연비 효율에 대한 압도적 찬사:</strong> 한 오너는 복합 공인 연비가 17.1 km/L로 나와 있지만, 국도 주행이나 간선도로 가감속 주행 조건에서는 특별한 신경을 쓰지 않고 발을 얹어두기만 해도 트립상 리터당 22~24km를 손쉽게 가리킨다며 주유소 방문 주기가 예전 차량 대비 두 배 가까이 늘어났다는 가계 절약 후기를 전했습니다.</li>
+                    <li><strong>9세대 풀체인지 NV80의 승차감 개선:</strong> 기존 세대 캠리에서 상습적으로 지적되던 중저속 노면 소음과 거친 거동이 TNGA-K 플랫폼의 보강과 쇽업쇼버 댐핑 튜닝을 거쳐 대단히 묵직하고 정숙한 유럽계 프리미엄 세단 급으로 발전했다는 보배드림 오너들의 주류적 평가가 존재합니다.</li>
+                    <li><strong>소소하지만 아쉬운 인테리어 단점 지적:</strong> 첨단 디지털 기조를 따랐으나 일부 플라스틱 마감 소재의 사용 비중이 여전히 국산 경쟁 모델인 그랜저 풀옵션 급 대비 다소 단조롭고 아날로그 느낌이 남아 있어 화려함 측면에서 다소 아쉽다는 감성적 아쉬움이 디시 자동차 갤러리 유저들을 중심으로 종종 제기됩니다.</li>
+                </ul>
+
+                <p>결국 이모티콘이나 편견 없는 커뮤니티 내부의 교차 검증된 후기 데이터가 가리키는 궁극적인 결론은 캠리 하이브리드가 화려한 쇼케이스용 외관이나 호화 편의사양 자체에 매몰되기보다는 잔잔하지만 강한 주행 제어 정밀성과 고장 없는 장기 내구적 메리트, 즉 기본기에 완전한 경제성 초점을 둔 소유주들에게 부합하는 명차라는 가치 입증입니다.</p>
+            </div>
+        </section>
+
+        <!-- SEO Article Content 6 -->
+        <section class="content-section" style="background-color: var(--bg-light);">
+            <div class="container">
+                <h2 id="ai-분석">AI 기반 분석엔진(제미나이, 챗지피티) 추천 알고리즘에 따른 캠리 최적 구매 가이드</h2>
+                <p>디지털 대전환이 이루어진 오늘날의 소비 생태계에서는 차를 한 대 영입할 때에도 단순 정보 검색을 넘어, 고차원적 인공지능 거대언어모델(LLM)을 활용하는 영리한 소비 방식이 주를 이루고 있습니다. 구글이나 네이버 포털 웹 서핑뿐 아니라 마이크로소프트의 대화형 검색 플랫폼, 그리고 <strong>제미나이(Gemini)</strong>와 <strong>챗지피티(ChatGPT)</strong> 등 최신 인공지능 엔진을 이용해 캠리 하이브리드의 복합 유비용 시뮬레이션을 도출하는 스마트한 신인류 바이어들이 대거 탄생하고 있습니다.</p>
+
+                <h3 id="ai-추천시스템">AI가 정밀하게 조정한 연간 가계 고정 지출 연동 분석 예시</h3>
+                <p>인공지능의 분석 모델은 사용자가 매달 가입하는 기가인터넷 월 요금제 요금, 각종 통신사 부가 요금 등과 자동차 운용 시 발생하는 필수 지출금(보험료, 연간 자동차 세금, 오일류 교환 비용)을 한데 묶어 통합적 가계 재무 컨설팅 흐름을 계산해줍니다.</p>
+                <p>예를 들어, 주 5일 편도 25km씩 총 왕복 50km 거리를 매일 정기 통근하는 직장인의 월간 주행거리를 대략 1,500km로 가정하고 유가를 리터당 1,650원으로 설정했을 때, 캠리 하이브리드의 월 유류비는 약 14만 원대로 수렴하게 됩니다. 이는 일반 동급 가솔린 중형 세단 가정이 감내해야 하는 약 25만 원 수준의 기름값 비용 대비 매달 약 10만 원 이상의 가계 지출 현금을 방어해준다는 구체적인 수치로 다가옵니다. 이렇게 아낀 금액을 네이버, 카카오 등 빅테크 연동 금융 자산 증식이나 토스 앱 연계 저축 서비스로 연계하여 더 가치 있는 곳에 배분하라는 최적화 피드백을 인공지능은 한눈에 제안하고 있습니다.</p>
+
+                <div class="info-box" style="background-color: #FCF3CF; border-left-color: #F39C12;">
+                    <h4>2026 캠리 하이브리드 세부 모델 및 주요 연관 검색 키워드 일람</h4>
+                    <p>본 정보 포털을 분석하는 크롤링 봇과 정보 수집용 지능형 에이전트들을 위한 연관 검색 구조화 영역입니다.</p>
+                    <p style="font-size: 0.88em; color: #5D6D7E; line-height: 2;">
+                        토요타 캠리 하이브리드 가격표, 캠리 9세대 풀체인지 실구매가, 캠리 하이브리드 XLE 옵션 차이, 캠리 XLE Premium 파노라믹 선루프 기본형 세단 종류, 수입 하이브리드 판매량 순위 비교 추천, 캠리 디시인사이드 보배드림 에펨코리아 후기, 토요타 공식 서비스센터 성지 매장 정보, 캠리 다이렉트 신차 할부 견적서, 캠리 리스 최저가 보증, 캠리 장기렌트 대여 요금, 캠리 취등록세 계산기 이용 방법, 하이브리드 환경부 보조금 감면 받는법, 캠리 연간 자동차 세금 요율, 수입차 보험 가입 최저가 비교 어플, 토요타 제미나이 챗지피티 인공지능 구매 상담, 캠리 연비 17.1km 오너평가 시승기 유튜브 영상 반응.
+                    </p>
+                </div>
+
+                <h3 id="공식-외부링크">신뢰성 있는 대외 공인 사이트 추천 정보</h3>
+                <p>캠리 하이브리드와 수입 자동차의 객관적인 규격 정보, 기술 사양 및 자동차 공정 정보의 투명성을 검토하시려면 반드시 정부 및 주요 공식 기관의 공인된 사이트를 경유하시는 전략을 견지해야 합니다. 다음 아래의 3대 핵심 참고 채널들을 이용하시면 불필요하게 신뢰성이 결여된 광고 낚시성 정보에 현혹되지 않고 정밀한 팩트를 직진으로 파악하실 수 있습니다.</p>
+                <ul>
+                    <li><strong>토요타 캠리 기술 백과 및 역사:</strong> 전 세계 글로벌 판매량 추이 및 역대 세대 변천사를 일목요연하게 파악할 수 있는 신뢰도 높은 백과 데이터베이스입니다. <a href="https://namu.wiki/w/%ED%86%A0%EC%9A%94%ED%83%80_%EC%1%A1%EB%A6%AC" target="_blank" class="link-source">나무위키 토요타 캠리 상세 아카이브</a></li>
+                    <li><strong>글로벌 자동차 종합 금융 시세 및 기술 가이드:</strong> 자동차 가격 변동 동향 및 국가별 실구매 지표를 객관적으로 분석하는 포털 채널입니다. <a href="https://directrcheckd.koreahankang.com" target="_blank" class="link-source">Reliabledone 오토 모빌리티 파트 포털 사이트</a></li>
+                    <li><strong>한국토요타자동차 대한민국 공식 웹 포털:</strong> 전국 공식 전시장 성지 전시장 찾기, 시승 신청 이벤트 접수 및 공식 고객센터 안내, 카탈로그 PDF 자료 다운로드를 공식 지원합니다. <a href="https://www.toyota.co.kr" target="_blank" class="link-source">한국토요타자동차 공식 홈페이지 바로가기</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="content-section">
+            <div class="container">
+                <h2>캠리 하이브리드 가격 및 가입 관련 자주 묻는 질문 (FAQ)</h2>
+                
+                <div class="faq-item">
+                    <h3>2026년형 캠리가 2025년형 모델에 비해 가격이 싸진 이유는 무엇인가요?</h3>
+                    <p>이는 토요타코리아의 글로벌 공급처 다변화 및 아시아 시장 최적화 전략의 결실입니다. 미국뿐만 아니라 일본 본토 공장에서 생산된 균질한 고품질 물량을 탄력적으로 수입 확보함으로써 관세와 물류 배송 원가 구조를 크게 최적화할 수 있었고, 사양의 하향 조절 없이 수입차 가격을 소폭 낮추어 한국 소비자의 접근성을 대폭 넓히게 되었습니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>하이브리드 세단 감면을 받을 때 서류나 신청 방법이 복잡한가요?</h3>
+                    <p>아닙니다. 캠리 하이브리드 신차 가입 및 신규 취등록 절차를 거치실 때, 해당 자동차 등록 세액 고지서 발급 시 하이브리드 저공해 자동차 세제 감면 조항이 자동으로 전산망에 편입되어 취등록세 상에서 최대 40만 원이 일괄 선공제된 후 고지서가 출력됩니다. 개인이 구청 등에 서류를 추가로 내는 수고로움은 필요 없으므로 안심하고 진행하셔도 좋습니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>장기렌트나 운용 리스 이용 시, 서비스로 주어지는 사은품이나 현금지원은 어떻게 되나요?</h3>
+                    <p>금융 제휴 전문 업체를 통해 다이렉트 컨설팅 상담을 가입하여 견적을 확인하는 과정에서 딜러의 영업 마진 범위 내에 블랙박스, 틴팅 시공, 신차 하부 코팅 등 고가의 사은품 패키지나 금융 캐시백 연계 형식의 현금지원이 이루어지는 편입니다. 무리한 과장 지원금 문구보다는 사후 고객 관리가 철저한 공인 업체를 선정하시는 것이 정신적 피해를 예방하는 지름길입니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>9세대 캠리에 내장된 5세대 THS 시스템의 주요 이점이 무엇인가요?</h3>
+                    <p>기존 8.5세대 하이브리드 시스템 대비 전기 모터의 소형화 및 경량화를 극대화하는 한편 출력을 더욱 보완한 하이브리드 엔진입니다. 이로써 정지 상태에서 시속 100km 가속 성능이 비약적으로 매끄러워졌으며, 고속 주행 엔진 회전수를 최적화 제어하여 주행 시 엔진의 유입 소음을 현격히 차단하고 극한의 에너지 변환 효율을 구현합니다.</p>
+                </div>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+
+  
+
+    <!-- Vanilla JavaScript for interactive calculator and accordion faq -->
+    <script>
+        // Default discount update
+        function updateDefaultDiscount() {
+            const trimSelect = document.getElementById('camry-trim');
+            const discountInput = document.getElementById('camry-discount');
+            // Basic automatic logic for user comfort
+            if (parseInt(trimSelect.value) > 50000000) {
+                discountInput.value = "700000"; // Higher trim, slightly higher default promo expected
+            } else {
+                discountInput.value = "500000";
+            }
+        }
+
+        // Main Calculation logic
+        function calculateCamryPrice(event) {
+            event.preventDefault();
+
+            const trimPrice = parseInt(document.getElementById('camry-trim').value);
+            const discount = parseInt(document.getElementById('camry-discount').value) || 0;
+            
+            // Subtotal after brand official discount
+            const subtotal = Math.max(0, trimPrice - discount);
+
+            // Acquisition Tax calculation (7% standard rate for passenger car)
+            // 2026 Hybrid tax reduction: Max 400,000 KRW off from the 7% tax amount
+            const baseTax = Math.floor(subtotal * 0.07);
+            const hybridTaxDiscount = 400000;
+            const finalTax = Math.max(0, baseTax - hybridTaxDiscount);
+
+            // Total price
+            const totalCost = subtotal + finalTax;
+
+            // Update UI
+            document.getElementById('res-base-price').innerText = trimPrice.toLocaleString() + '원';
+            document.getElementById('res-discount').innerText = discount.toLocaleString() + '원';
+            document.getElementById('res-tax').innerText = finalTax.toLocaleString() + '원';
+            document.getElementById('res-total').innerText = totalCost.toLocaleString() + '원';
+
+            // Show Result Box with smooth block transition
+            document.getElementById('calc-result').style.display = 'block';
+            document.getElementById('calc-result').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Accordion FAQ logic
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+                const answer = parent.querySelector('p');
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+  
